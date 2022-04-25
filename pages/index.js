@@ -2,28 +2,21 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import Select from "react-select";
+import general_book from "../config/general_book";
+import translated_book from "../config/translated_book";
 import styles from "../styles/Home.module.css";
 
-const TranslatedBookComponent = () => {
-  const translated_book_list = [
-    "author",
-    "year",
-    "title",
-    "translator",
-    "publisher",
-  ];
-
+const a = { translated_book: translated_book, general_book: general_book };
+const GenerateComponent = ({ method }) => {
+  const list = a[method].list;
+  const inputs = a[method].inputs;
   const [results, setResults] = useState({
-    author: "著者",
-    year: "2022",
-    title: "タイトル",
-    translator: "訳者",
-    publisher: "出版社",
+    ...inputs,
   });
+  const generatedText = a[method].text(results);
   return (
     <>
-      <h2>訳本</h2>
-      {translated_book_list.map((text) => {
+      {list.map((text) => {
         return (
           <input
             placeholder={text}
@@ -37,7 +30,7 @@ const TranslatedBookComponent = () => {
           navigator.clipboard.writeText(e.target.textContent);
         }}
       >
-        {`${results.author}(${results.year})『${results.title}』${results.translator}、${results.publisher}。`}
+        {generatedText}
       </p>
       <p className=" text-sm text-gray-400">
         テキストをクリックするとコピーできます。
@@ -46,21 +39,12 @@ const TranslatedBookComponent = () => {
   );
 };
 
-const Generator = ({ method }) => {
-  switch (method) {
-    case "translated_book":
-      return <TranslatedBookComponent />;
-  }
-};
 export default function Home() {
   const handleChangeType = (e) => {};
   const [generatorType, SetGeneratorType] = useState("translated_book");
   const options = [
     { value: "translated_book", label: "訳本" },
-    // { value: "year", label: "year" },
-    // { value: "title", label: "title" },
-    // { value: "translator", label: "translator" },
-    // { value: "publisher", label: "publisher" },
+    { value: "general_book", label: "一般書物" },
   ];
 
   return (
@@ -72,7 +56,7 @@ export default function Home() {
       </Head>
       <h1 className="text-3xl">SoTSoG</h1>
       <Select options={options} onChange={(e) => SetGeneratorType(e.value)} />
-      <Generator method={generatorType} />
+      <GenerateComponent method={generatorType} />
     </div>
   );
 }
