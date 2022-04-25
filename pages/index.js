@@ -14,21 +14,16 @@ const format_type = {
 };
 
 const GenerateComponent = ({ method }) => {
-  const list = format_type[method].list;
-  const inputs = format_type[method].inputs;
-  const [results, setResults] = useState(
-    {
-      ...inputs,
-    },
-    []
-  );
+  const datas = format_type[method].datas;
+  const list = Object.keys(datas);
+  const [results, setResults] = useState(datas);
   const generatedText = format_type[method].text(results);
   return (
     <>
       {list.map((text) => {
         return (
           <input
-            placeholder={results[text]}
+            placeholder={datas[text]}
             onChange={(e) => setResults({ ...results, [text]: e.target.value })}
             key={text}
           ></input>

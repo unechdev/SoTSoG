@@ -1,15 +1,5 @@
 // （著者名（出版年）「論文タイトル」、『雑誌名』第〇巻第△号、出版学会名、ページ数。）
-const list = [
-  "author",
-  "year",
-  "title",
-  "book_name",
-  "book_when",
-  "publisher",
-  "page",
-];
-
-const inputs = {
+const datas = {
   author: "著者名",
   year: "2022",
   title: "論文タイトル",
@@ -24,10 +14,7 @@ const textGenerator = (results) => {
 };
 
 const magazine_dissertation = {
-  nameJA: "雑誌論文",
-  nameEN: "magazine_dissertation",
-  list: list,
-  inputs: inputs,
+  datas: datas,
   text: textGenerator,
 };
 

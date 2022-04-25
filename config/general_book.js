@@ -2,7 +2,7 @@
 
 const list = ["author", "year", "title", "publisher"];
 
-const inputs = {
+const datas = {
   author: "著者",
   year: "2022",
   title: "タイトル",
@@ -17,7 +17,7 @@ const general_book = {
   nameJA: "一般書物",
   nameEN: "translated_book",
   list: list,
-  inputs: inputs,
+  datas: datas,
   text: textGenerator,
 };
 
