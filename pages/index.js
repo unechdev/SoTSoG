@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import Select from "react-select";
+import complete_book from "../config/complete_book";
 import general_book from "../config/general_book";
 import magazine_dissertation from "../config/magazine_dissertation";
 import translated_book from "../config/translated_book";
@@ -11,6 +12,7 @@ const format_type = {
   translated_book: translated_book,
   general_book: general_book,
   magazine_dissertation: magazine_dissertation,
+  complete_book: complete_book,
 };
 
 const GenerateComponent = ({ method }) => {
@@ -49,6 +51,7 @@ export default function Home() {
     { value: "translated_book", label: "訳本" },
     { value: "general_book", label: "一般書物" },
     { value: "magazine_dissertation", label: "雑誌論文" },
+    { value: "complete_book", label: "全集" },
   ];
 
   return (
