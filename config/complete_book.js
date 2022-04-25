@@ -11,7 +11,7 @@ const datas = {
 // （原著者名（出版年）「タイトル」訳者名訳、『収録著作名』、出版社、 ページ数。）
 
 const textGenerator = (results) => {
-  return `${results.author}(${results.year})『${results.title}』${results.translator}、『${original}』、${results.publisher}、${page}。`;
+  return `${results.author}(${results.year})『${results.title}』${results.translator}、『${results.original}』、${results.publisher}、${results.page}。`;
 };
 
 const complete_book = {
