@@ -3,23 +3,27 @@ import Image from "next/image";
 import { useState } from "react";
 import Select from "react-select";
 import general_book from "../config/general_book";
+import magazine_dissertation from "../config/magazine_dissertation";
 import translated_book from "../config/translated_book";
 import styles from "../styles/Home.module.css";
 
-const a = { translated_book: translated_book, general_book: general_book };
+const format_type = {
+  translated_book: translated_book,
+  general_book: general_book,
+  magazine_dissertation: magazine_dissertation,
+};
+
 const GenerateComponent = ({ method }) => {
-  const list = a[method].list;
-  const inputs = a[method].inputs;
-  const [results, setResults] = useState({
-    ...inputs,
-  });
-  const generatedText = a[method].text(results);
+  const datas = format_type[method].datas;
+  const list = Object.keys(datas);
+  const [results, setResults] = useState(datas);
+  const generatedText = format_type[method].text(results);
   return (
     <>
       {list.map((text) => {
         return (
           <input
-            placeholder={text}
+            placeholder={datas[text]}
             onChange={(e) => setResults({ ...results, [text]: e.target.value })}
             key={text}
           ></input>
@@ -40,11 +44,11 @@ const GenerateComponent = ({ method }) => {
 };
 
 export default function Home() {
-  const handleChangeType = (e) => {};
   const [generatorType, SetGeneratorType] = useState("translated_book");
   const options = [
     { value: "translated_book", label: "訳本" },
     { value: "general_book", label: "一般書物" },
+    { value: "magazine_dissertation", label: "雑誌論文" },
   ];
 
   return (
